@@ -143,7 +143,8 @@ $$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} [y^i \log(h_\beta(x^i)) + (1-y^i) \log(
 **Interprétation des coefficients :** pour un coefficient $\beta_j$, une augmentation d'une unité en $x_j$ multiplie les odds par $e^{\beta_j}$ (changement de probabilité $\approx \beta_j/4$ quand $P \approx 0.5$).
 
 **Règle de décision :**
-$$\text{Prédiction} = \begin{cases} 1 & \text{si } P(y=1|x) \geq 0.5 \\ 0 & \text{si } P(y=1|x) < 0.5 \end{cases}$$
+$$\text{Prédiction} = \begin{cases} 1 & \text{si } P(y=1|x) \geq 0.5 \cr 0 & \text{si } P(y=1|x) < 0.5 \end{cases}$$
+
 
 
 **Matrice de confusion :**
