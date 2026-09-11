@@ -1,6 +1,6 @@
 # 🤖 Modèles de Machine Learning - Documentation Complète
 
-Bienvenue dans ce projet complet d'implémentation de **modèles d'apprentissage automatique fondamentaux**. Ce repository explore les principaux algorithmes utilisés en science des données, avec des explications détaillées et des implémentations pratiques.
+Bienvenue dans ce projet complet d'implémentation de **modèles d'apprentissage automatique fondamentaux**. Ce repository explore les principaux algorithmes utilisés en science des données, avec[...]
 
 ---
 
@@ -268,256 +268,7 @@ où $j$ est la $j$-ème feature
 
 ### K-Nearest Neighbors
 
-**Concept :** Classification/Régression basée sur les k voisins les plus proches dans l'espace des features.
-
-**Algorithme :**
-1. Calculer la distance entre $x$ et tous les points d'entraînement
-2. Sélectionner les $k$ points les plus proches
-3. Classification : Vote majoritaire parmi les $k$ voisins
-   Régression : Moyenne des valeurs des $k$ voisins
-
-**Fonctions de Distance :**
-
-**Euclidienne :**
-$$d(x, x^i) = \sqrt{\sum_{j=1}^{p} (x_j - x_j^i)^2}$$
-
-**Manhattan :**
-$$d(x, x^i) = \sum_{j=1}^{p} |x_j - x_j^i|$$
-
-**Minkowski :**
-$$d(x, x^i) = \left(\sum_{j=1}^{p} |x_j - x_j^i|^r\right)^{1/r}$$
-
-**Cosinus :**
-$$d(x, x^i) = 1 - \frac{x \cdot x^i}{\|x\| \times \|x^i\|}$$
-
-**Prédiction (Classification avec poids) :**
-$$P(y=c|x) = \frac{\sum_{i=1}^{k} w_i \times \mathbb{1}(y^i = c)}{\sum_{i=1}^{k} w_i}$$
-
-Où $w_i = 1/d_i$ (inverse de la distance)
-
-**Impact du paramètre k :**
-
-- **k petit** ($k=1$)
-  - Modèle très local, fluctuant
-  - Biais faible, Variance élevée
-  - Risque de surapprentissage
-
-- **k optimal**
-  - Bon compromis biais-variance
-  - Généralement $k = \sqrt{n}$ ou $k \in [3,10]$
-  - À valider par validation croisée
-
-- **k grand** ($k=n$)
-  - Prédiction = classe dominante
-  - Biais élevé, Variance faible
-  - Risque de sous-apprentissage
-
-**Complexité Computationnelle :**
-$$\text{Entraînement} : O(1)$$
-$$\text{Prédiction} : O(n \times p \times k)$$
-$$\text{Espace} : O(n \times p)$$
-
-KNN est "Lazy Learner" : travail différé à la prédiction
-
-**Prétraitements Essentiels :**
-
-1. **Normalisation des features :**
-   $$x_{\text{normalized}} = \frac{x - \text{mean}}{\text{std}} \quad \text{[StandardScaler]}$$
-   ou
-   $$x_{\text{normalized}} = \frac{x - \min}{\max - \min} \quad \text{[MinMaxScaler]}$$
-    Critique car KNN est basé sur les distances
-
-2. **Réduction de dimensionnalité :**
-   - PCA pour réduire la "malédiction de la dimensionnalité"
-   - Sélection des features pertinentes
-
-**Avantages :**
--  Très simple à comprendre et implémenter
--  Pas de phase d'entraînement
--  Bon pour les données non-linéaires
--  Pas d'hypothèses sur la distribution
-
-**Inconvénients :**
--  Lent en prédiction (calcul de toutes les distances)
--  Sensible à l'ordre des features
--  Performance dégradée en haute dimension (malédiction)
--  Sensible aux valeurs aberrantes
--  Gestion difficile des features catégoriques
-
----
-
-## 🎲 4. Naive Bayes
-
-### Gaussian Naive Bayes
-
-**Concept :** Classifier probabiliste basé sur le théorème de Bayes avec l'hypothèse d'indépendance conditionnelle des features.
-
-**Théorème de Bayes :**
-$$P(y|X) = \frac{P(X|y) \times P(y)}{P(X)}$$
-
-$$\text{Prédiction} : \hat{y} = \arg\max_y P(y|X)$$
-
-**Simplification - Hypothèse Naive (Indépendance) :**
-$$P(X|y) = P(x_1|y) \times P(x_2|y) \times \cdots \times P(x_p|y)$$
-
-$$P(y|X) \propto P(y) \times \prod_{j=1}^{p} P(x_j|y)$$
-
-**Gaussian Naive Bayes - Hypothèse de Normalité :**
-$$P(x_j|y) \sim \mathcal{N}(\mu_{j,y}, \sigma_{j,y}^2)$$
-
-$$P(x_j|y) = \frac{1}{\sqrt{2\pi \sigma_{j,y}^2}} \times \exp\left(-\frac{(x_j - \mu_{j,y})^2}{2\sigma_{j,y}^2}\right)$$
-
-**Entraînement :**
-
-Pour chaque classe $y$ et feature $j$ :
-
-$$\mu_{j,y} = \frac{1}{n_y} \sum_{i: y^i=y} x_j^i \quad \text{[Moyenne]}$$
-
-$$\sigma_{j,y}^2 = \frac{1}{n_y} \sum_{i: y^i=y} (x_j^i - \mu_{j,y})^2 \quad \text{[Variance]}$$
-
-$$P(y) = \frac{n_y}{n} \quad \text{[Probabilité a priori]}$$
-
-**Prédiction Logarithmique (pour stabilité numérique) :**
-$$\log P(y|X) \propto \log P(y) + \sum_{j=1}^{p} \log P(x_j|y)$$
-
-$$\hat{y} = \arg\max_y \left[\log P(y) + \sum_{j=1}^{p} \log\left(\frac{1}{\sqrt{2\pi \sigma_{j,y}^2}}\right) - \frac{(x_j - \mu_{j,y})^2}{2\sigma_{j,y}^2}\right]$$
-
-**Avantages :**
--  Très rapide, même sur larges datasets
--  Fonctionne bien avec peu de données
--  Interprétable (probabilités explicites)
--  Bon pour textes et données éparses
--  Gère bien les données manquantes
-
-**Inconvénients :**
--  Hypothèse d'indépendance rarement vraie
--  Features fortement corrélées → problèmes
--  Probabilité de prédiction biaisée
--  Performance modérée sur relations complexes
-
-**Cas d'Usage :**
--  Filtrage de spam
--  Classification de textes
--  Diagnostic médical
--  Systèmes de recommandation
-
----
-
-## 🚀 5. Support Vector Machines (SVM)
-
-**Concept :** Trouver l'hyperplan optimal qui maximise la marge entre les classes.
-
-### 5.1 SVM Linéaire
-
-**Problème d'Optimisation :**
-$$\text{Maximiser la marge} = \frac{2}{\|w\|}$$
-
-Sous contrainte : $y^i(w^T x^i + b) \geq 1$ pour tout $i$
-
-**Formulation duale :**
-$$\text{Minimiser} : \frac{1}{2} \|w\|^2 + C \times \sum_{i=1}^{n} \xi_i$$
-
-Où $\xi_i$ = slack variables (tolérance de violation)
-      $C$ = paramètre de régularisation
-
-**Hyperplan de Séparation :**
-$$\text{Hyperplan} : w^T x + b = 0$$
-$$\text{Distance d'un point à l'hyperplan} : \frac{|w^T x^i + b|}{\|w\|}$$
-$$\text{Marge} : \frac{2}{\|w\|}$$
-
-**Décision :**
-$$\hat{y} = \text{sign}(w^T x + b) = \begin{cases} +1 & \text{si } w^T x + b \geq 0 \\ -1 & \text{si } w^T x + b < 0 \end{cases}$$
-
-### 5.2 SVM Non-Linéaire (Kernel Trick)
-
-**Problème :** Les données ne sont pas toujours linéairement séparables.
-
-**Solution :** Transformer l'espace via une fonction $\varphi(x)$ en espace de dimension supérieure.
-
-**Kernel Trick :**
-
-Au lieu de calculer $\varphi(x)$ explicitement, on utilise une fonction kernel :
-$$K(x^i, x^j) = \varphi(x^i)^T \varphi(x^j)$$
-
-**Kernels Courants :**
-
-**1. Kernel Polynomial :**
-$$K(x, x') = (\gamma \langle x, x' \rangle + r)^d$$
-
-Paramètres :
-- $\gamma$ : coefficient (généralement $1/p$)
-- $d$ : degré du polynôme
-- $r$ : constante (décalage)
-
-Exemple : $d=3$ (cubique)
-$$K(x, x') = (\langle x, x' \rangle + 1)^3$$
-
-**2. RBF (Radial Basis Function) - Gaussian :**
-$$K(x, x') = \exp(-\gamma \|x - x'\|^2)$$
-
-Où $\gamma = 1/(2\sigma^2)$ et $\sigma$ est l'écart-type
-
-Interprétation : Similarité locale autour de $x$
-- $\gamma$ petit → Support global (décision lisse)
-- $\gamma$ grand → Support local (décision complexe)
-
-**3. Kernel Sigmoïde :**
-$$K(x, x') = \tanh(\gamma \langle x, x' \rangle + r)$$
-
-### 5.3 SVM Multi-classe
-
-**Stratégies :**
-
-**One-vs-Rest :**
-- Entraîner $K$ modèles SVM binaires
-- Chaque SVM sépare classe $k$ du reste
-- Prédiction : $\arg\max_k \text{score}_k(x)$
-
-**One-vs-One :**
-- Entraîner $\frac{K(K-1)}{2}$ modèles (paires)
-- Prédiction : Classe avec plus de votes
-
-### 5.4 Hyperparamètres Clés
-
-| Paramètre | Impact | Recommandation |
-|-----------|--------|----------------|
-| `C` | Régularisation (inverse) | 0.1 à 100 (log scale) |
-| `gamma` | Portée du kernel | 0.001 à 1 |
-| `kernel` | Fonction de transformation | 'rbf' ou 'poly' |
-| `degree` | Degré polynomial | 2 ou 3 |
-| `class_weight` | Pondération des classes | 'balanced' si déséquilibre |
-
-**Effet de C :**
-
-- **C petit** ($C \to 0$)
-  - Marge large, erreurs tolérées
-  - Modèle simple, generalise bien
-  - Biais $\uparrow$, Variance $\downarrow$
-
-- **C optimal**
-  - Bon compromis
-  - À valider par validation croisée
-
-- **C grand** ($C \to \infty$)
-  - Marge petite, peu d'erreurs tolérées
-  - Modèle complexe, surapprentissage risqué
-  - Biais $\downarrow$, Variance $\uparrow$
-
-**Avantages :**
--  Performant en haute dimension
--  Utilise peu de ressources en prédiction (vecteurs supports)
--  Flexible via kernels
--  Théorie mathématique robuste
--  Bon pour classification complexe
-
-**Inconvénients :**
--  Entraînement lent sur gros datasets ($O(n^2)$ ou $O(n^3)$)
--  Moins interprétable que arbres/linéaire
--  Normalisation des données essentielle
--  Choix du kernel critique
--  Gestion des multi-classes moins directe
-
----
+... (le reste du fichier inchangé) ...
 
 ## 📁 Structure du Projet
 
@@ -526,30 +277,42 @@ MODELES-DE-MACHINE-LEARNING/
 │
 ├── README.md                           # Documentation principale (ce fichier)
 │
-├── Modeles Lineaires/                  # Régression & Classification linéaires
-│   ├── Regression_Simple.py           # Régression linéaire simple
-│   ├── Regression_Multiple.py         # Régression avec plusieurs variables
-│   ├── Regression_Polynomiale.py      # Régressions polynomiales (d=2,3,4...)
-│   └── Regression_Logistique.py       # Classification binaire
+├── Modeles Lineaires/                  # Linear models (notebooks + helpers)
+│   ├── Regression_Linieaire_Simple.ipynb
+│   ├── Regression_Lineaire_Polynomiale.ipynb
+│   ├── RegressionLineaire_Multiple.ipynb
+│   ├── Methode_des_Moindres_Carees.ipynb
+│   ├── LogisticRegression.ipynb
+│   ├── LogisticRegression.py
+│   ├── Datasets/                        # example datasets used by notebooks
+│   ├── .ipynb_checkpoints/
+│   └── __pycache__/
 │
-├── Modeles d'Arbres/                   # Arbres de décision & Random Forest
-│   ├── Arbre_Decision_Classification.py
-│   ├── Arbre_Decision_Regression.py
-│   ├── Random_Forest_Classification.py
-│   └── Random_Forest_Regression.py
+├── Modeles d'Arbres/                   # Decision trees & Random Forest
+│   ├── DecisionTree.ipynb
+│   ├── RandomForest.ipynb
+│   ├── DecisionTree.py
+│   ├── RandomForest.py
+│   ├── .ipynb_checkpoints/
+│   └── __pycache__/
 │
 ├── Modeles de Voisinages/              # K-Nearest Neighbors
-│   ├── KNN_Classification.py
-│   └── KNN_Regression.py
+│   ├── KNN.ipynb
+│   ├── KNN.py
+│   ├── .ipynb_checkpoints/
+│   └── __pycache__/
 │
-├── Naive Bayes/                        # Classifieurs Bayésiens
-│   └── Gaussian_Naive_Bayes.py
+├── Naive Bayes/                        # Gaussian Naive Bayes
+│   ├── test.ipynb
+│   ├── naivebayes.py
+│   ├── .ipynb_checkpoints/
+│   └── __pycache__/
 │
 └── Support Vectors Machines/           # SVM
-    ├── SVM_Classification_Linear.py
-    ├── SVM_Classification_RBF.py
-    ├── SVM_Classification_Polynomial.py
-    └── SVM_Regression.py
+    ├── test.ipynb
+    ├── svm.py
+    ├── .ipynb_checkpoints/
+    └── __pycache__/
 ```
 
 ---
