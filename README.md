@@ -53,9 +53,9 @@ $$\beta_0 := \beta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)$$
 $$\beta_1 := \beta_1 - \alpha \frac{1}{m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)x^i$$
 
 **Cas d'usage :**
-- ✅ Prédire des prix (immobilier, actions)
-- ✅ Analyser des tendances
-- ✅ Relation linéaire claire entre variables
+-  Prédire des prix (immobilier, actions)
+-  Analyser des tendances
+-  Relation linéaire claire entre variables
 
 **Avantages & Inconvénients :**
 | Avantages | Inconvénients |
@@ -188,16 +188,16 @@ $$\text{Entropie}(t) = -\sum_{j=1}^{c} p_j \log_2(p_j)$$
 $$\text{Information}_{\text{Gain}} = \text{Entropie}(\text{parent}) - \text{Entropie}_{\text{split}}$$
 
 **Avantages :**
-- ✅ Interprétable et visualisable
-- ✅ Pas de normalisation des données nécessaire
-- ✅ Capture les non-linéarités
-- ✅ Gère automatiquement les interactions
+-  Interprétable et visualisable
+-  Pas de normalisation des données nécessaire
+-  Capture les non-linéarités
+-  Gère automatiquement les interactions
 
 **Inconvénients :**
-- ❌ Tendance au surapprentissage
-- ❌ Instabilité (petits changements → gros changements dans l'arbre)
-- ❌ Biais vers les features avec plus de valeurs
-- ❌ Performances modérées sur données complexes
+-  Tendance au surapprentissage
+-  Instabilité (petits changements → gros changements dans l'arbre)
+-  Biais vers les features avec plus de valeurs
+-  Performances modérées sur données complexes
 
 **Hyperparamètres clés :**
 | Paramètre | Impact |
@@ -247,11 +247,11 @@ $$\text{Importance}_j = \frac{1}{m} \sum_{i=1}^{m} (\text{Gini}_{\text{before}} 
 où $j$ est la $j$-ème feature
 
 **Avantages :**
-- ✅ Performance souvent meilleure que arbres individuels
-- ✅ Réduit le surapprentissage (via diversité)
-- ✅ Robuste aux valeurs aberrantes
-- ✅ Traite bien les données déséquilibrées
-- ✅ Calcule l'importance des features
+-  Performance souvent meilleure que arbres individuels
+-  Réduit le surapprentissage (via diversité)
+-  Robuste aux valeurs aberrantes
+-  Traite bien les données déséquilibrées
+-  Calcule l'importance des features
 
 **Hyperparamètres :**
 | Paramètre | Recommandation |
@@ -264,7 +264,7 @@ où $j$ est la $j$-ème feature
 
 ---
 
-## 👥 3. Modèles de Voisinages (KNN)
+##  3. Modèles de Voisinages (KNN)
 
 ### K-Nearest Neighbors
 
@@ -325,24 +325,24 @@ KNN est "Lazy Learner" : travail différé à la prédiction
    $$x_{\text{normalized}} = \frac{x - \text{mean}}{\text{std}} \quad \text{[StandardScaler]}$$
    ou
    $$x_{\text{normalized}} = \frac{x - \min}{\max - \min} \quad \text{[MinMaxScaler]}$$
-   ⚠️ Critique car KNN est basé sur les distances
+    Critique car KNN est basé sur les distances
 
 2. **Réduction de dimensionnalité :**
    - PCA pour réduire la "malédiction de la dimensionnalité"
    - Sélection des features pertinentes
 
 **Avantages :**
-- ✅ Très simple à comprendre et implémenter
-- ✅ Pas de phase d'entraînement
-- ✅ Bon pour les données non-linéaires
-- ✅ Pas d'hypothèses sur la distribution
+-  Très simple à comprendre et implémenter
+-  Pas de phase d'entraînement
+-  Bon pour les données non-linéaires
+-  Pas d'hypothèses sur la distribution
 
 **Inconvénients :**
-- ❌ Lent en prédiction (calcul de toutes les distances)
-- ❌ Sensible à l'ordre des features
-- ❌ Performance dégradée en haute dimension (malédiction)
-- ❌ Sensible aux valeurs aberrantes
-- ❌ Gestion difficile des features catégoriques
+-  Lent en prédiction (calcul de toutes les distances)
+-  Sensible à l'ordre des features
+-  Performance dégradée en haute dimension (malédiction)
+-  Sensible aux valeurs aberrantes
+-  Gestion difficile des features catégoriques
 
 ---
 
@@ -383,23 +383,23 @@ $$\log P(y|X) \propto \log P(y) + \sum_{j=1}^{p} \log P(x_j|y)$$
 $$\hat{y} = \arg\max_y \left[\log P(y) + \sum_{j=1}^{p} \log\left(\frac{1}{\sqrt{2\pi \sigma_{j,y}^2}}\right) - \frac{(x_j - \mu_{j,y})^2}{2\sigma_{j,y}^2}\right]$$
 
 **Avantages :**
-- ✅ Très rapide, même sur larges datasets
-- ✅ Fonctionne bien avec peu de données
-- ✅ Interprétable (probabilités explicites)
-- ✅ Bon pour textes et données éparses
-- ✅ Gère bien les données manquantes
+-  Très rapide, même sur larges datasets
+-  Fonctionne bien avec peu de données
+-  Interprétable (probabilités explicites)
+-  Bon pour textes et données éparses
+-  Gère bien les données manquantes
 
 **Inconvénients :**
-- ❌ Hypothèse d'indépendance rarement vraie
-- ❌ Features fortement corrélées → problèmes
-- ❌ Probabilité de prédiction biaisée
-- ❌ Performance modérée sur relations complexes
+-  Hypothèse d'indépendance rarement vraie
+-  Features fortement corrélées → problèmes
+-  Probabilité de prédiction biaisée
+-  Performance modérée sur relations complexes
 
 **Cas d'Usage :**
-- 📧 Filtrage de spam
-- 📝 Classification de textes
-- 🏥 Diagnostic médical
-- ⭐ Systèmes de recommandation
+-  Filtrage de spam
+-  Classification de textes
+-  Diagnostic médical
+-  Systèmes de recommandation
 
 ---
 
@@ -504,18 +504,18 @@ $$K(x, x') = \tanh(\gamma \langle x, x' \rangle + r)$$
   - Biais $\downarrow$, Variance $\uparrow$
 
 **Avantages :**
-- ✅ Performant en haute dimension
-- ✅ Utilise peu de ressources en prédiction (vecteurs supports)
-- ✅ Flexible via kernels
-- ✅ Théorie mathématique robuste
-- ✅ Bon pour classification complexe
+-  Performant en haute dimension
+-  Utilise peu de ressources en prédiction (vecteurs supports)
+-  Flexible via kernels
+-  Théorie mathématique robuste
+-  Bon pour classification complexe
 
 **Inconvénients :**
-- ❌ Entraînement lent sur gros datasets ($O(n^2)$ ou $O(n^3)$)
-- ❌ Moins interprétable que arbres/linéaire
-- ❌ Normalisation des données essentielle
-- ❌ Choix du kernel critique
-- ❌ Gestion des multi-classes moins directe
+-  Entraînement lent sur gros datasets ($O(n^2)$ ou $O(n^3)$)
+-  Moins interprétable que arbres/linéaire
+-  Normalisation des données essentielle
+-  Choix du kernel critique
+-  Gestion des multi-classes moins directe
 
 ---
 
@@ -662,60 +662,6 @@ for name, importance in zip(iris.feature_names, rf.feature_importances_):
 
 ---
 
-## 🎓 Conseils d'Apprentissage
-
-### Ordre Recommandé
-1. **Débuter** : Régression Linéaire Simple → Multiple → Logistique
-2. **Progresser** : Arbres de Décision → Random Forest
-3. **Approfondissement** : KNN → Naive Bayes → SVM
-4. **Combinaison** : Ensembles (Stacking, Blending)
-
-### Bonnes Pratiques
-✅ **Toujours explorer les données** (EDA)
-✅ **Faire train/validation/test split**
-✅ **Normaliser les features** (StandardScaler)
-✅ **Utiliser validation croisée** (stratifiée pour déséquilibre)
-✅ **Hypertune les hyperparamètres** (GridSearchCV, RandomizedSearchCV)
-✅ **Vérifier les hypothèses du modèle**
-✅ **Documenter les résultats**
-
-### Pièges Courants
-❌ **Data Leakage** : Information test fuit dans l'entraînement
-❌ **Classe Imbalancée** : Sans stratification ni pondération
-❌ **Pas de baseline** : Comparaison nécessaire
-❌ **Overfitting silent** : Bon score train, mauvais score test
-❌ **Features interactions** : Manquées par modèles trop simples
-
----
-
-## 🚀 Prochaines Étapes
-
-- [ ] Ajouter exemples complets (datasets réels)
-- [ ] Visualisations interactives
-- [ ] Comparaison entre modèles
-- [ ] Techniques d'ensemble avancées
-- [ ] Deep Learning basics
-- [ ] Techniques de traitement du texte (NLP)
-- [ ] Réduction de dimensionnalité (PCA, t-SNE)
-
----
-
-## 📧 Contact & Contribution
-
-Ce projet est une ressource pédagogique. N'hésitez pas à :
-- 🐛 Signaler des bugs
-- 💡 Proposer des améliorations
-- 📝 Ajouter des explications
-- 🔧 Enrichir les implémentations
-
----
-
-**Dernière mise à jour :** 2026-09-11  
-**Version :** 2.0  
-**Licence :** MIT
-
----
-
 ## 📊 Tableau Comparatif - Choisir le Bon Modèle
 
 | Critère | Linéaire | Arbre | RF | KNN | Naive B. | SVM |
@@ -731,4 +677,3 @@ Ce projet est une ressource pédagogique. N'hésitez pas à :
 
 ---
 
-*Bonne chance dans votre apprentissage du Machine Learning ! 🚀*
