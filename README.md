@@ -1,6 +1,6 @@
 # 🤖 Modèles de Machine Learning - Documentation Complète
 
-Bienvenue dans ce projet complet d'implémentation de **modèles d'apprentissage automatique fondamentaux**. Ce repository explore les principaux algorithmes utilisés en science des données, avec des explications théoriques, des formules mathématiques et des implémentations pratiques.
+Bienvenue dans ce projet complet d'implémentation de **modèles d'apprentissage automatique fondamentaux**. Ce repository explore les principaux algorithmes utilisés en science des données, avec des explications détaillées et des implémentations pratiques.
 
 ---
 
@@ -35,28 +35,22 @@ Ce projet implémente six catégories principales d'algorithmes de machine learn
 
 ### 1.1 Régression Linéaire Simple
 
-**Concept :** Modéliser la relation linéaire entre une variable indépendante `X` et une variable dépendante `Y`.
+**Concept :** Modéliser la relation linéaire entre une variable indépendante $X$ et une variable dépendante $Y$.
 
 **Équation :**
-```
-ŷ = β₀ + β₁x
-```
+$$\hat{y} = \beta_0 + \beta_1 x$$
 
 Où :
-- `β₀` : intercept (ordonnée à l'origine)
-- `β₁` : coefficient directeur (pente)
-- `ŷ` : valeur prédite
+- $\beta_0$ : intercept (ordonnée à l'origine)
+- $\beta_1$ : coefficient directeur (pente)
+- $\hat{y}$ : valeur prédite
 
 **Fonction de Coût (MSE - Mean Squared Error) :**
-```
-J(β₀, β₁) = (1/2m) Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)²
-```
+$$J(\beta_0, \beta_1) = \frac{1}{2m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)^2$$
 
 **Optimisation (Descente de Gradient) :**
-```
-β₀ := β₀ - α(1/m) Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)
-β₁ := β₁ - α(1/m) Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)xⁱ
-```
+$$\beta_0 := \beta_0 - \alpha \frac{1}{m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)$$
+$$\beta_1 := \beta_1 - \alpha \frac{1}{m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)x^i$$
 
 **Cas d'usage :**
 - ✅ Prédire des prix (immobilier, actions)
@@ -74,39 +68,32 @@ J(β₀, β₁) = (1/2m) Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)²
 
 ### 1.2 Régression Linéaire Multiple
 
-**Concept :** Généralisation de la régression simple avec `p` variables indépendantes.
+**Concept :** Généralisation de la régression simple avec $p$ variables indépendantes.
 
 **Équation matricielle :**
-```
-ŷ = Xβ
-```
+$$\hat{y} = X\beta$$
 
 Où :
-- `X` : matrice de design (n × p)
-- `β` : vecteur de coefficients
-- `ŷ` : vecteur de prédictions
+- $X$ : matrice de design (n × p)
+- $\beta$ : vecteur de coefficients
+- $\hat{y}$ : vecteur de prédictions
 
 **Solution analytique (Équations Normales) :**
-```
-β = (Xᵀ X)⁻¹ Xᵀ y
-```
+$$\beta = (X^T X)^{-1} X^T y$$
 
 **Hypothèses du modèle (Gauss-Markov) :**
-1. Linéarité : E[y|X] = Xβ
-2. Pas de multicolinéarité : rang(X) = p
-3. Homoscédasticité : Var(ε) = σ² I
+1. Linéarité : $E[y|X] = X\beta$
+2. Pas de multicolinéarité : $\text{rang}(X) = p$
+3. Homoscédasticité : $\text{Var}(\varepsilon) = \sigma^2 I$
 4. Indépendance des erreurs
-5. Normalité des erreurs : ε ~ N(0, σ²I)
+5. Normalité des erreurs : $\varepsilon \sim \mathcal{N}(0, \sigma^2I)$
 
 **Métriques d'évaluation :**
-```
-R² = 1 - (SS_res / SS_tot)
-    = 1 - Σ(yⁱ - ŷⁱ)² / Σ(yⁱ - ȳ)²
+$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum(y^i - \hat{y}^i)^2}{\sum(y^i - \bar{y})^2}$$
 
-RMSE = √(1/m Σᵢ₌₁ᵐ (yⁱ - ŷⁱ)²)
+$$RMSE = \sqrt{\frac{1}{m} \sum_{i=1}^{m} (y^i - \hat{y}^i)^2}$$
 
-MAE = 1/m Σᵢ₌₁ᵐ |yⁱ - ŷⁱ|
-```
+$$MAE = \frac{1}{m} \sum_{i=1}^{m} |y^i - \hat{y}^i|$$
 
 ---
 
@@ -115,31 +102,21 @@ MAE = 1/m Σᵢ₌₁ᵐ |yⁱ - ŷⁱ|
 **Concept :** Modéliser des relations non-linéaires en créant des features polynomiales.
 
 **Équation :**
-```
-ŷ = β₀ + β₁x + β₂x² + β₃x³ + ... + βₚxᵖ
-```
+$$\hat{y} = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3 + \cdots + \beta_p x^p$$
 
 **Exemple : Polynomial d'ordre 3**
-```
-ŷ = β₀ + β₁x + β₂x² + β₃x³
-```
+$$\hat{y} = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3$$
 
 **Transformation des features :**
-```
-Φ(x) = [1, x, x², x³, ..., xᵖ]
-```
+$$\Phi(x) = [1, x, x^2, x^3, \ldots, x^p]$$
 
 **Complexité & Risque de Surapprentissage :**
-```
-Erreur totale = Biais² + Variance + Bruit
+$$\text{Erreur totale} = \text{Biais}^2 + \text{Variance} + \text{Bruit}$$
 - Ordre faible → Biais élevé (sous-apprentissage)
 - Ordre élevé → Variance élevée (surapprentissage)
-```
 
 **Régularisation pour éviter le surapprentissage :**
-```
-J(β) = 1/2m Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)² + λ/2m Σⱼ₌₁ᵖ βⱼ²  (Ridge)
-```
+$$J(\beta) = \frac{1}{2m} \sum_{i=1}^{m} (h_\beta(x^i) - y^i)^2 + \frac{\lambda}{2m} \sum_{j=1}^{p} \beta_j^2 \quad \text{(Ridge)}$$
 
 ---
 
@@ -148,48 +125,38 @@ J(β) = 1/2m Σᵢ₌₁ᵐ (hβ(xⁱ) - yⁱ)² + λ/2m Σⱼ₌₁ᵖ βⱼ² 
 **Concept :** Classification binaire en modélisant la probabilité d'appartenance à la classe positive.
 
 **Fonction Sigmoïde :**
-```
-σ(z) = 1 / (1 + e^(-z))
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
-Où z = β₀ + β₁x₁ + β₂x₂ + ... + βₚxₚ
-```
+Où $z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p$
 
 **Hypothèse (Probabilité Prédite) :**
-```
-P(y=1|x) = σ(Xβ) = 1 / (1 + e^(-Xβ))
-P(y=0|x) = 1 - σ(Xβ)
-```
+$$P(y=1|x) = \sigma(X\beta) = \frac{1}{1 + e^{-X\beta}}$$
+$$P(y=0|x) = 1 - \sigma(X\beta)$$
 
 **Fonction de Coût (Log Loss / Cross-Entropy) :**
-```
-J(β) = -1/m Σᵢ₌₁ᵐ [yⁱ log(hβ(xⁱ)) + (1-yⁱ) log(1-hβ(xⁱ))]
-```
+$$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} [y^i \log(h_\beta(x^i)) + (1-y^i) \log(1-h_\beta(x^i))]$$
 
 **Interprétation des Coefficients :**
-```
-Pour un coefficient β_j :
-- Une augmentation d'une unité en x_j 
-  → Multiplicateur de odds = e^(β_j)
-  → Changement en probabilité ≈ β_j/4 (quand P ≈ 0.5)
-```
+
+Pour un coefficient $\beta_j$ :
+- Une augmentation d'une unité en $x_j$ 
+- Multiplicateur de odds = $e^{\beta_j}$
+- Changement en probabilité $\approx \beta_j/4$ (quand $P \approx 0.5$)
 
 **Décision :**
-```
-Prédiction = 1 si P(y=1|x) ≥ 0.5
-Prédiction = 0 si P(y=1|x) < 0.5
-```
+$$\text{Prédiction} = \begin{cases} 1 & \text{si } P(y=1|x) \geq 0.5 \\ 0 & \text{si } P(y=1|x) < 0.5 \end{cases}$$
 
 **Matrice de Confusion & Métriques :**
-```
-              Prédiction Positive | Prédiction Négative
-Réalité Positive      TP (True +)  |      FN (Faux -)
-Réalité Négative      FP (Faux +)  |      TN (True -)
 
-Précision = TP / (TP + FP)           [Exactitude des prédictions positives]
-Rappel    = TP / (TP + FN)           [Couverture des vrais positifs]
-F1-Score  = 2(Précision × Rappel) / (Précision + Rappel)
-AUC-ROC   = Aire sous la courbe ROC
-```
+|  | Prédiction Positive | Prédiction Négative |
+|---|---|---|
+| **Réalité Positive** | TP (True +) | FN (Faux -) |
+| **Réalité Négative** | FP (Faux +) | TN (True -) |
+
+$$\text{Précision} = \frac{TP}{TP + FP} \quad \text{[Exactitude des prédictions positives]}$$
+$$\text{Rappel} = \frac{TP}{TP + FN} \quad \text{[Couverture des vrais positifs]}$$
+$$\text{F1-Score} = \frac{2(\text{Précision} \times \text{Rappel})}{\text{Précision} + \text{Rappel}}$$
+$$\text{AUC-ROC} = \text{Aire sous la courbe ROC}$$
 
 ---
 
@@ -199,45 +166,26 @@ AUC-ROC   = Aire sous la courbe ROC
 
 **Concept :** Modèle hiérarchique qui divise l'espace des features selon des règles simples en cascade.
 
-**Structure :**
-```
-                    X₁ ≤ 5?
-                   /        \
-                YES          NO
-               /              \
-          X₂ ≤ 10?          X₃ ≤ 20?
-          /      \           /      \
-        ...      ...       ...      ...
-        
-      [Feuilles = Classes/Valeurs prédites]
-```
-
 **Critères de Division (Split) :**
 
 **Pour la Classification (Gini Index) :**
-```
-Gini(t) = 1 - Σⱼ₌₁ᶜ (pⱼ)²
+$$\text{Gini}(t) = 1 - \sum_{j=1}^{c} (p_j)^2$$
 
-Où pⱼ = proportion de classe j au nœud t
+Où $p_j$ = proportion de classe j au nœud t
 
-Gini_split = (n_left/n) × Gini(left) + (n_right/n) × Gini(right)
+$$\text{Gini}_{\text{split}} = \frac{n_{\text{left}}}{n} \times \text{Gini}(\text{left}) + \frac{n_{\text{right}}}{n} \times \text{Gini}(\text{right})$$
 
-Gain = Gini(parent) - Gini_split
-```
+$$\text{Gain} = \text{Gini}(\text{parent}) - \text{Gini}_{\text{split}}$$
 
 **Pour la Régression (Réduction de Variance) :**
-```
-Variance(t) = Σᵢ₌₁ⁿ (yⁱ - ȳ)² / n
+$$\text{Variance}(t) = \frac{\sum_{i=1}^{n} (y^i - \bar{y})^2}{n}$$
 
-Variance_reduction = Var(parent) - [(n_left/n) × Var(left) + (n_right/n) × Var(right)]
-```
+$$\text{Variance}_{\text{reduction}} = \text{Var}(\text{parent}) - \left[\frac{n_{\text{left}}}{n} \times \text{Var}(\text{left}) + \frac{n_{\text{right}}}{n} \times \text{Var}(\text{right})\right]$$
 
 **Entropie Shannon :**
-```
-Entropie(t) = -Σⱼ₌₁ᶜ pⱼ log₂(pⱼ)
+$$\text{Entropie}(t) = -\sum_{j=1}^{c} p_j \log_2(p_j)$$
 
-Information_Gain = Entropie(parent) - Entropie_split
-```
+$$\text{Information}_{\text{Gain}} = \text{Entropie}(\text{parent}) - \text{Entropie}_{\text{split}}$$
 
 **Avantages :**
 - ✅ Interprétable et visualisable
@@ -267,46 +215,36 @@ Information_Gain = Entropie(parent) - Entropie_split
 
 **Processus :**
 
-```
-1. Bootstrap Sampling (Bagging)
-   - Créer m échantillons bootstrap (avec remplacement)
-   - Chaque bootstrap ≈ 63.2% des données originales
+1. **Bootstrap Sampling (Bagging)**
+   - Créer $m$ échantillons bootstrap (avec remplacement)
+   - Chaque bootstrap $\approx 63.2\%$ des données originales
    
-2. Entraîner un arbre sur chaque bootstrap
+2. **Entraîner un arbre sur chaque bootstrap**
    - Avec randomisation des features à chaque split
    
-3. Prédictions d'ensemble
-   Classification  : Vote majoritaire
-   Régression      : Moyenne des prédictions
-```
+3. **Prédictions d'ensemble**
+   - Classification : Vote majoritaire
+   - Régression : Moyenne des prédictions
 
 **Formule de Prédiction :**
 
 **Classification (Voting) :**
-```
-Ŷ = argmax_k Σᵢ₌₁ᵐ 𝕀(Tᵢ(x) = k)
-```
+$$\hat{Y} = \arg\max_k \sum_{i=1}^{m} \mathbb{1}(T_i(x) = k)$$
 
 **Régression (Averaging) :**
-```
-Ŷ = 1/m Σᵢ₌₁ᵐ Tᵢ(x)
-```
+$$\hat{Y} = \frac{1}{m} \sum_{i=1}^{m} T_i(x)$$
 
 **Réduction de Variance par Ensemble :**
-```
-Var(Ŷ_ensemble) = ρ·Var(Tree) + (1-ρ)/m · Var(Tree)
+$$\text{Var}(\hat{Y}_{\text{ensemble}}) = \rho \cdot \text{Var}(\text{Tree}) + \frac{1-\rho}{m} \cdot \text{Var}(\text{Tree})$$
 
-Où ρ = corrélation moyenne entre arbres
+Où $\rho$ = corrélation moyenne entre arbres
 
-Idéalement ρ → 0 pour maximum de réduction
-```
+Idéalement $\rho \to 0$ pour maximum de réduction
 
 **Importance des Features (Mean Decrease in Impurity) :**
-```
-Importanceⱼ = 1/m Σᵢ₌₁ᵐ (Gini_before - Gini_after) × n_samples / n_total
+$$\text{Importance}_j = \frac{1}{m} \sum_{i=1}^{m} (\text{Gini}_{\text{before}} - \text{Gini}_{\text{after}}) \times \frac{n_{\text{samples}}}{n_{\text{total}}}$$
 
-où j est la j-ème feature
-```
+où $j$ est la $j$-ème feature
 
 **Avantages :**
 - ✅ Performance souvent meilleure que arbres individuels
@@ -319,8 +257,8 @@ où j est la j-ème feature
 | Paramètre | Recommandation |
 |-----------|----------------|
 | `n_estimators` | 100-1000 (plus = mieux, mais coûteux) |
-| `max_depth` | None ou log₂(n_features) |
-| `max_features` | √p (classification) ou p/3 (régression) |
+| `max_depth` | None ou $\log_2(n_{\text{features}})$ |
+| `max_features` | $\sqrt{p}$ (classification) ou $p/3$ (régression) |
 | `min_samples_split` | 2-5 |
 | `bootstrap` | True (obligatoire pour bagging) |
 
@@ -333,78 +271,60 @@ où j est la j-ème feature
 **Concept :** Classification/Régression basée sur les k voisins les plus proches dans l'espace des features.
 
 **Algorithme :**
-```
-Pour une nouvelle observation x :
-1. Calculer la distance entre x et tous les points d'entraînement
-2. Sélectionner les k points les plus proches
-3. Classification  : Vote majoritaire parmi les k voisins
-   Régression      : Moyenne des valeurs des k voisins
-```
+1. Calculer la distance entre $x$ et tous les points d'entraînement
+2. Sélectionner les $k$ points les plus proches
+3. Classification : Vote majoritaire parmi les $k$ voisins
+   Régression : Moyenne des valeurs des $k$ voisins
 
 **Fonctions de Distance :**
 
 **Euclidienne :**
-```
-d(x, xⁱ) = √(Σⱼ₌₁ᵖ (xⱼ - xⱼⁱ)²)
-```
+$$d(x, x^i) = \sqrt{\sum_{j=1}^{p} (x_j - x_j^i)^2}$$
 
 **Manhattan :**
-```
-d(x, xⁱ) = Σⱼ₌₁ᵖ |xⱼ - xⱼⁱ|
-```
+$$d(x, x^i) = \sum_{j=1}^{p} |x_j - x_j^i|$$
 
 **Minkowski :**
-```
-d(x, xⁱ) = (Σⱼ₌₁ᵖ |xⱼ - xⱼⁱ|^r)^(1/r)
-```
+$$d(x, x^i) = \left(\sum_{j=1}^{p} |x_j - x_j^i|^r\right)^{1/r}$$
 
 **Cosinus :**
-```
-d(x, xⁱ) = 1 - (x · xⁱ) / (||x|| × ||xⁱ||)
-```
+$$d(x, x^i) = 1 - \frac{x \cdot x^i}{\|x\| \times \|x^i\|}$$
 
 **Prédiction (Classification avec poids) :**
-```
-P(y=c|x) = Σᵢ₌₁ᵏ wᵢ × 𝕀(yⁱ = c) / Σᵢ₌₁ᵏ wᵢ
+$$P(y=c|x) = \frac{\sum_{i=1}^{k} w_i \times \mathbb{1}(y^i = c)}{\sum_{i=1}^{k} w_i}$$
 
-Où wᵢ = 1/dᵢ (inverse de la distance)
-```
+Où $w_i = 1/d_i$ (inverse de la distance)
 
 **Impact du paramètre k :**
 
-```
-k petit (k=1)
-├─ Modèle très local, fluctuant
-├─ Biais faible, Variance élevée
-└─ Risque de surapprentissage
+- **k petit** ($k=1$)
+  - Modèle très local, fluctuant
+  - Biais faible, Variance élevée
+  - Risque de surapprentissage
 
-k optimal
-├─ Bon compromis biais-variance
-├─ Généralement k = √n ou k ∈ [3,10]
-└─ À valider par validation croisée
+- **k optimal**
+  - Bon compromis biais-variance
+  - Généralement $k = \sqrt{n}$ ou $k \in [3,10]$
+  - À valider par validation croisée
 
-k grand (k=n)
-├─ Prédiction = classe dominante
-├─ Biais élevé, Variance faible
-└─ Risque de sous-apprentissage
-```
+- **k grand** ($k=n$)
+  - Prédiction = classe dominante
+  - Biais élevé, Variance faible
+  - Risque de sous-apprentissage
 
 **Complexité Computationnelle :**
-```
-Entraînement : O(1)           [Pas d'entraînement réel]
-Prédiction  : O(n × p × k)   [Calcul de distances + tri]
-Espace      : O(n × p)       [Stockage de tout l'entraînement]
+$$\text{Entraînement} : O(1)$$
+$$\text{Prédiction} : O(n \times p \times k)$$
+$$\text{Espace} : O(n \times p)$$
 
-→ KNN est "Lazy Learner" : travail différé à la prédiction
-```
+KNN est "Lazy Learner" : travail différé à la prédiction
 
 **Prétraitements Essentiels :**
+
 1. **Normalisation des features :**
-   ```
-   x_normalized = (x - mean) / std  [StandardScaler]
+   $$x_{\text{normalized}} = \frac{x - \text{mean}}{\text{std}} \quad \text{[StandardScaler]}$$
    ou
-   x_normalized = (x - min) / (max - min)  [MinMaxScaler]
-   ```
+   $$x_{\text{normalized}} = \frac{x - \min}{\max - \min} \quad \text{[MinMaxScaler]}$$
    ⚠️ Critique car KNN est basé sur les distances
 
 2. **Réduction de dimensionnalité :**
@@ -433,58 +353,34 @@ Espace      : O(n × p)       [Stockage de tout l'entraînement]
 **Concept :** Classifier probabiliste basé sur le théorème de Bayes avec l'hypothèse d'indépendance conditionnelle des features.
 
 **Théorème de Bayes :**
-```
-P(y|X) = P(X|y) × P(y) / P(X)
+$$P(y|X) = \frac{P(X|y) \times P(y)}{P(X)}$$
 
-Prédiction : ŷ = argmax_y P(y|X)
-```
+$$\text{Prédiction} : \hat{y} = \arg\max_y P(y|X)$$
 
 **Simplification - Hypothèse Naive (Indépendance) :**
-```
-P(X|y) = P(x₁|y) × P(x₂|y) × ... × P(xₚ|y)
+$$P(X|y) = P(x_1|y) \times P(x_2|y) \times \cdots \times P(x_p|y)$$
 
-Donc : P(y|X) ∝ P(y) × ∏ⱼ₌₁ᵖ P(xⱼ|y)
-```
+$$P(y|X) \propto P(y) \times \prod_{j=1}^{p} P(x_j|y)$$
 
 **Gaussian Naive Bayes - Hypothèse de Normalité :**
-```
-P(xⱼ|y) ~ N(μⱼ,y, σⱼ,y²)
+$$P(x_j|y) \sim \mathcal{N}(\mu_{j,y}, \sigma_{j,y}^2)$$
 
-P(xⱼ|y) = 1/(√(2π σⱼ,y²)) × exp(-(xⱼ - μⱼ,y)²/(2σⱼ,y²))
-```
+$$P(x_j|y) = \frac{1}{\sqrt{2\pi \sigma_{j,y}^2}} \times \exp\left(-\frac{(x_j - \mu_{j,y})^2}{2\sigma_{j,y}^2}\right)$$
 
 **Entraînement :**
-```
-Pour chaque classe y et feature j :
 
-μⱼ,y = 1/nᵧ Σᵢ: yⁱ=y xⱼⁱ              [Moyenne]
+Pour chaque classe $y$ et feature $j$ :
 
-σⱼ,y² = 1/nᵧ Σᵢ: yⁱ=y (xⱼⁱ - μⱼ,y)²  [Variance]
+$$\mu_{j,y} = \frac{1}{n_y} \sum_{i: y^i=y} x_j^i \quad \text{[Moyenne]}$$
 
-P(y) = nᵧ / n                          [Probabilité a priori]
-```
+$$\sigma_{j,y}^2 = \frac{1}{n_y} \sum_{i: y^i=y} (x_j^i - \mu_{j,y})^2 \quad \text{[Variance]}$$
+
+$$P(y) = \frac{n_y}{n} \quad \text{[Probabilité a priori]}$$
 
 **Prédiction Logarithmique (pour stabilité numérique) :**
-```
-log P(y|X) ∝ log P(y) + Σⱼ₌₁ᵖ log P(xⱼ|y)
+$$\log P(y|X) \propto \log P(y) + \sum_{j=1}^{p} \log P(x_j|y)$$
 
-ŷ = argmax_y [log P(y) + Σⱼ₌₁ᵖ log(1/(√(2π σⱼ,y²))) - (xⱼ - μⱼ,y)²/(2σⱼ,y²)]
-```
-
-**Visualisation : Probabilités de Classes**
-
-```
-Données binaires, 2 features :
-
-y=0 (Classe 0)          y=1 (Classe 1)
-   X₂                      X₂
-   |    ●  ●               |        ◯  ◯
-   |  ●      ●             |    ◯      ◯
-   |___________X₁          |___________X₁
-
-P(y=0|X) = P(X|0)P(0)/P(X)
-P(y=1|X) = P(X|1)P(1)/P(X)
-```
+$$\hat{y} = \arg\max_y \left[\log P(y) + \sum_{j=1}^{p} \log\left(\frac{1}{\sqrt{2\pi \sigma_{j,y}^2}}\right) - \frac{(x_j - \mu_{j,y})^2}{2\sigma_{j,y}^2}\right]$$
 
 **Avantages :**
 - ✅ Très rapide, même sur larges datasets
@@ -514,119 +410,72 @@ P(y=1|X) = P(X|1)P(1)/P(X)
 ### 5.1 SVM Linéaire
 
 **Problème d'Optimisation :**
-```
-Maximiser la marge = 2/||w||
+$$\text{Maximiser la marge} = \frac{2}{\|w\|}$$
 
-Sous contrainte : yⁱ(wᵀxⁱ + b) ≥ 1  pour tout i
+Sous contrainte : $y^i(w^T x^i + b) \geq 1$ pour tout $i$
 
-Formulation duale :
-Minimiser : 1/2 ||w||² + C × Σᵢ₌₁ⁿ ξᵢ
+**Formulation duale :**
+$$\text{Minimiser} : \frac{1}{2} \|w\|^2 + C \times \sum_{i=1}^{n} \xi_i$$
 
-Où ξᵢ = slack variables (tolérance de violation)
-      C = paramètre de régularisation
-```
+Où $\xi_i$ = slack variables (tolérance de violation)
+      $C$ = paramètre de régularisation
 
 **Hyperplan de Séparation :**
-```
-Hyperplan : wᵀx + b = 0
-Distance d'un point à l'hyperplan : |wᵀxⁱ + b| / ||w||
-Marge : 2 / ||w||
-```
+$$\text{Hyperplan} : w^T x + b = 0$$
+$$\text{Distance d'un point à l'hyperplan} : \frac{|w^T x^i + b|}{\|w\|}$$
+$$\text{Marge} : \frac{2}{\|w\|}$$
 
 **Décision :**
-```
-ŷ = sign(wᵀx + b) = { +1 si wᵀx + b ≥ 0
-                      -1 si wᵀx + b < 0
-```
-
-**Visualisation (Cas 2D) :**
-```
-      y=+1                    Hyperplan optimal
-       ●    ....              (maximise marge)
-            .  .
-       ●   .    .   Marge     w ⊥ hyperplan
-          .      .
-    ─ ─ ─ ─ ─ ─ ─ ─ ─ ─     Vecteurs supports
-         .      .
-        .    .   ○
-            .  .
-           ○   y=-1
-```
+$$\hat{y} = \text{sign}(w^T x + b) = \begin{cases} +1 & \text{si } w^T x + b \geq 0 \\ -1 & \text{si } w^T x + b < 0 \end{cases}$$
 
 ### 5.2 SVM Non-Linéaire (Kernel Trick)
 
 **Problème :** Les données ne sont pas toujours linéairement séparables.
 
-**Solution :** Transformer l'espace via une fonction φ(x) en espace de dimension supérieure.
+**Solution :** Transformer l'espace via une fonction $\varphi(x)$ en espace de dimension supérieure.
 
 **Kernel Trick :**
-```
-Au lieu de calculer φ(x) explicitement,
-on utilise une fonction kernel : K(xⁱ, xʲ) = φ(xⁱ)ᵀ φ(xʲ)
 
-Avantage : Calcul efficace sans connaître φ explicitement
-```
+Au lieu de calculer $\varphi(x)$ explicitement, on utilise une fonction kernel :
+$$K(x^i, x^j) = \varphi(x^i)^T \varphi(x^j)$$
 
 **Kernels Courants :**
 
 **1. Kernel Polynomial :**
-```
-K(x, x') = (γ x·x' + r)^d
+$$K(x, x') = (\gamma \langle x, x' \rangle + r)^d$$
 
 Paramètres :
-- γ : coefficient (généralement 1/p)
-- d : degré du polynôme
-- r : constante (décalage)
+- $\gamma$ : coefficient (généralement $1/p$)
+- $d$ : degré du polynôme
+- $r$ : constante (décalage)
 
-Exemple : d=3 (cubique)
-K(x, x') = (x·x' + 1)³
-```
+Exemple : $d=3$ (cubique)
+$$K(x, x') = (\langle x, x' \rangle + 1)^3$$
 
 **2. RBF (Radial Basis Function) - Gaussian :**
-```
-K(x, x') = exp(-γ ||x - x'||²)
+$$K(x, x') = \exp(-\gamma \|x - x'\|^2)$$
 
-γ = 1/(2σ²)  où σ est l'écart-type
+Où $\gamma = 1/(2\sigma^2)$ et $\sigma$ est l'écart-type
 
-Interprétation : Similarité locale autour de x
-- γ petit   → Support global (décision lisse)
-- γ grand   → Support local (décision complexe)
-```
+Interprétation : Similarité locale autour de $x$
+- $\gamma$ petit → Support global (décision lisse)
+- $\gamma$ grand → Support local (décision complexe)
 
 **3. Kernel Sigmoïde :**
-```
-K(x, x') = tanh(γ x·x' + r)
-```
-
-**Transformation d'Espace :**
-```
-Espace original (2D, non-linéaire)    Espace transformé (3D, linéaire)
-                                      
-    ●  ○  ○                          ●  ●  ●
-   ●  ○  ●  ○                   →   ○  ○  ○
-  ●  ○  ○  ●  ○                     ○  ○  ○
-
-Non séparable linéairement          Linéairement séparable
-```
+$$K(x, x') = \tanh(\gamma \langle x, x' \rangle + r)$$
 
 ### 5.3 SVM Multi-classe
 
 **Stratégies :**
 
 **One-vs-Rest :**
-```
-Pour K classes :
-- Entraîner K modèles SVM binaires
-- Chaque SVM sépare classe k du reste
-- Prédiction : argmax_k score_k(x)
-```
+- Entraîner $K$ modèles SVM binaires
+- Chaque SVM sépare classe $k$ du reste
+- Prédiction : $\arg\max_k \text{score}_k(x)$
 
 **One-vs-One :**
-```
-Pour K classes :
-- Entraîner K(K-1)/2 modèles (paires)
+- Entraîner $\frac{K(K-1)}{2}$ modèles (paires)
 - Prédiction : Classe avec plus de votes
-```
 
 ### 5.4 Hyperparamètres Clés
 
@@ -639,21 +488,20 @@ Pour K classes :
 | `class_weight` | Pondération des classes | 'balanced' si déséquilibre |
 
 **Effet de C :**
-```
-C petit (C → 0)
-├─ Marge large, erreurs tolérées
-├─ Modèle simple, generalise bien
-└─ Biais ↑, Variance ↓
 
-C optimal
-├─ Bon compromis
-└─ À valider par validation croisée
+- **C petit** ($C \to 0$)
+  - Marge large, erreurs tolérées
+  - Modèle simple, generalise bien
+  - Biais $\uparrow$, Variance $\downarrow$
 
-C grand (C → ∞)
-├─ Marge petite, peu d'erreurs tolérées
-├─ Modèle complexe, surapprentissage risqué
-└─ Biais ↓, Variance ↑
-```
+- **C optimal**
+  - Bon compromis
+  - À valider par validation croisée
+
+- **C grand** ($C \to \infty$)
+  - Marge petite, peu d'erreurs tolérées
+  - Modèle complexe, surapprentissage risqué
+  - Biais $\downarrow$, Variance $\uparrow$
 
 **Avantages :**
 - ✅ Performant en haute dimension
@@ -663,7 +511,7 @@ C grand (C → ∞)
 - ✅ Bon pour classification complexe
 
 **Inconvénients :**
-- ❌ Entraînement lent sur gros datasets (O(n²) ou O(n³))
+- ❌ Entraînement lent sur gros datasets ($O(n^2)$ ou $O(n^3)$)
 - ❌ Moins interprétable que arbres/linéaire
 - ❌ Normalisation des données essentielle
 - ❌ Choix du kernel critique
