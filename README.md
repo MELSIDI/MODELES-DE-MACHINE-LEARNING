@@ -145,6 +145,7 @@ $$J(\beta) = -\frac{1}{m} \sum_{i=1}^{m} [y^i \log(h_\beta(x^i)) + (1-y^i) \log(
 **Règle de décision :**
 $$\text{Prédiction} = \begin{cases} 1 & \text{si } P(y=1|x) \geq 0.5 \\ 0 & \text{si } P(y=1|x) < 0.5 \end{cases}$$
 
+
 **Matrice de confusion :**
 
 |  | Prédiction positive | Prédiction négative |
