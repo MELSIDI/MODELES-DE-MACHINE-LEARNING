@@ -28,8 +28,6 @@ Implémentation et documentation mathématique des **algorithmes fondamentaux du
 4. [Modèles de voisinage (KNN)](#-4-modèles-de-voisinage-knn)
 5. [Naive Bayes](#-5-naive-bayes)
 6. [Support Vector Machines (SVM)](#-6-support-vector-machines-svm)
-7. [Résultats et benchmarks](#-7-résultats-et-benchmarks)
-8. [Installation & utilisation](#-8-installation--utilisation)
 ---
  
 ## 🎯 1. Vue d'ensemble
@@ -451,82 +449,5 @@ Les *support vectors* sont les points avec $\alpha_i > 0$ — généralement peu
 | `kernel` | `linear`, `poly`, `rbf`, `sigmoid` |
 | `degree` | Degré polynomial (si `kernel='poly'`) |
  
----
- 
-## 🔬 7. Résultats et benchmarks
- 
-Résultats obtenus sur le dataset **Iris** (référence de comparaison rapide entre modèles) :
- 
-| Modèle | Dataset | Accuracy | Temps (s) |
-|---|---|---|---|
-| Régression logistique | Iris | 97% | 0.01 |
-| Random Forest | Iris | 100% | 0.05 |
-| SVM (RBF) | Iris | 98% | 0.02 |
-| KNN (k=3) | Iris | 96% | 0.01 |
-| Naive Bayes | Iris | 96% | 0.005 |
- 
----
- 
-## ⚙️ 8. Installation & utilisation
- 
-### Prérequis
- 
-```bash
-Python 3.8+
-pip >= 21.0
-```
- 
-### Installation
- 
-```bash
-# 1. Cloner le repository
-git clone https://github.com/MELSIDI/MODELES-DE-MACHINE-LEARNING.git
-cd MODELES-DE-MACHINE-LEARNING
- 
-# 2. Créer un environnement virtuel
-python -m venv venv
-source venv/bin/activate  # Sur Windows : venv\Scripts\activate
- 
-# 3. Installer les dépendances
-pip install -r requirements.txt
-```
- 
-### Dépendances principales
- 
-```
-numpy>=1.21.0
-pandas>=1.3.0
-scikit-learn>=1.0.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
-jupyter>=1.0.0
-```
- 
-### Utilisation
- 
-```bash
-jupyter notebook
-```
- 
-Puis ouvrir le notebook correspondant au modèle à étudier.
- 
-**Exemple — Régression linéaire simple :**
- 
-```python
-from helpers.linear_regression import LinearRegression
-import numpy as np
- 
-# Générer les données
-X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
-y = np.array([2, 4, 5, 4, 5])
- 
-# Créer et entraîner le modèle
-model = LinearRegression()
-model.fit(X, y)
- 
-# Faire une prédiction
-y_pred = model.predict(X)
-print(f"Prédictions : {y_pred}")
-print(f"Coefficients : {model.coef_}, Intercept : {model.intercept_}")
-```
+
  
