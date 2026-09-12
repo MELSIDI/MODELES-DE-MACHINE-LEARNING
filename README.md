@@ -30,7 +30,7 @@ Implémentation et documentation mathématique des **algorithmes fondamentaux du
 6. [Support Vector Machines (SVM)](#-6-support-vector-machines-svm)
 ---
  
-## 🎯 1. Vue d'ensemble
+## 1. Vue d'ensemble
  
 Ce projet implémente six familles principales d'algorithmes de Machine Learning :
  
