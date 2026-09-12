@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 Modèles de Machine Learning — Documentation Complète
+# Modèles de Machine Learning - Documentation Complète
 
 ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/-scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
@@ -14,7 +14,7 @@ Implémentation et documentation mathématique des **algorithmes fondamentaux du
 
 ---
 
-## 📚 Table des matières
+## Table des matières
  
 1. [Vue d'ensemble](#-1-vue-densemble)
 2. [Modèles linéaires](#-2-modèles-linéaires)
@@ -44,7 +44,7 @@ Ce projet implémente six familles principales d'algorithmes de Machine Learning
  
 ---
  
-## 📊 2. Modèles linéaires
+## 2. Modèles linéaires
  
 ### 2.1 Régression linéaire simple
  
@@ -199,7 +199,7 @@ $$
  
 ---
  
-## 🌳 3. Modèles d'arbres
+## 3. Modèles d'arbres
  
 ### 3.1 Arbres de décision
  
@@ -296,7 +296,7 @@ $$
  
 ---
  
-## 🏘️ 4. Modèles de voisinage (KNN)
+## 4. Modèles de voisinage (KNN)
  
 **Concept.** Algorithme à base d'instances qui classe un point selon la majorité de ses $k$ plus proches voisins.
  
@@ -337,7 +337,7 @@ $$
  
 ---
  
-## 🎰 5. Naive Bayes
+## 5. Naive Bayes
  
 **Concept.** Classifieur probabiliste basé sur le théorème de Bayes avec hypothèse d'indépendance conditionnelle des features.
  
@@ -380,7 +380,7 @@ où $\mu_i$ et $\sigma_i^2$ sont estimés à partir des données d'entraînement
  
 ---
  
-## 🎯 6. Support Vector Machines (SVM)
+## 6. Support Vector Machines (SVM)
  
 **Concept.** Trouver l'hyperplan qui maximise la marge entre les classes.
  
